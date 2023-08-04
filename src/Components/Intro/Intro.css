@@ -1,0 +1,41 @@
+.intro-container{
+  min-height: 816px;
+  background: url('../../assets/bg-intro.jpg');
+  background-attachment: fixed;
+}
+
+.intro{
+  padding-left: 100px;
+}
+
+.intro img{
+  max-width: 100%;
+}
+
+.intro h4{
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 48px;
+  font-family: Poppins;
+  max-width: 612px; 
+}
+
+@media (max-width:1250px) {
+  .intro{
+    text-align: center;
+    padding: 0;
+    align-items: center;
+    justify-content: center;
+  }
+  .intro h4{
+    margin: auto;
+  }
+
+}
+
+@media (max-width:650px) {
+  .intro{
+    text-align: center;
+    padding: 0;
+  }
+}

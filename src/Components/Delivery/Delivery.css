@@ -1,0 +1,64 @@
+.delivery-container {
+  display: flex;
+  min-height: 576px;
+  background: url('../../assets/bg-delivery.png');
+  align-items: center;
+  justify-content: space-between;
+}
+
+.delivery {
+  padding-left: 100px;
+}
+
+.deliveryimg {
+  padding-right: 144px;
+  max-width: 100%;
+}
+
+.delivery h2 {
+  font-size: 64px;
+  font-family: Urbanist;
+  color: #534944;
+  display: flex;
+}
+
+.delivery p {
+  max-width: 586px;
+  font-size: 20px;
+  font-family: Poppins;
+}
+
+.delivery p > span {
+  font-weight: bold;
+}
+
+@media (max-width: 1400px) {
+  .delivery {
+    padding-left: 30px;
+  }
+  .deliveryimg {
+    padding-right: 20px;
+  }
+}
+
+@media (max-width: 1150px) {
+  .delivery-container {
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+    margin: auto;
+    justify-content: center;
+  }
+  .delivery {
+    padding-left: 0px;
+  }
+  .delivery h2 {
+    justify-content: center;
+  }
+  .deliveryimg {
+    padding-right: 0px;
+  }
+  .delivery > button{
+    margin-top: 30px;
+  }
+}

@@ -1,0 +1,32 @@
+.container-header{
+  min-height: 96px;
+  background: url('../../assets/header-bg.png');
+  background-position: left;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.menu-header{
+  display: flex;
+  gap: 32px;
+}
+
+.menu-header a{
+  text-decoration: none;
+  color: #635750;
+  font-size: 24px;
+  font-family: 'Poppins', sans-serif;
+}
+
+@media (max-width:450px){
+  .menu-header{
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .menu-header a{
+    text-decoration: underline;
+  }
+}

@@ -1,0 +1,65 @@
+.restaurant-container {
+  display: flex;
+  min-height: 576px;
+  background: url('../../assets/bg-restaurant.png');
+  align-items: center;
+  justify-content: space-between;
+}
+
+.restaurant {
+  padding-right: 100px;
+}
+
+.restaurantimg {
+  padding-left: 144px;
+  max-width: 100%;
+  margin-top: 10px;
+}
+
+.restaurant h2 {
+  font-size: 64px;
+  font-family: Urbanist;
+  color: #534944;
+  display: flex;
+}
+
+.restaurant p {
+  max-width: 586px;
+  font-size: 20px;
+  font-family: Poppins;
+}
+
+.restaurant p > span {
+  font-weight: bold;
+}
+
+@media (max-width: 1400px) {
+  .restaurant {
+    padding-right: 30px;
+  }
+  .restaurantimg {
+    padding-left: 20px;
+  }
+}
+
+@media (max-width: 1150px) {
+  .restaurant-container {
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+    margin: auto;
+    justify-content: center;
+  }
+  .restaurant {
+    padding-right: 0px;
+  }
+  .restaurant h2 {
+    justify-content: center;
+  }
+  .restaurantimg {
+    padding-left: 0px;
+  }
+  .restaurant > button{
+    margin-top: 30px;
+  }
+}
