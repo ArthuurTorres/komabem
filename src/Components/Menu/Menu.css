@@ -1,4 +1,4 @@
-.menu-container{
+.menu-container {
   min-height: 688px;
   text-align: center;
   background-color: #e3d7cc;
@@ -9,7 +9,7 @@
   font-family: Poppins;
 }
 
-.menu-container h2{
+.menu-container h2 {
   font-weight: 500;
   font-size: 48px;
   line-height: 72px;
@@ -17,7 +17,7 @@
   margin-top: 1rem;
 }
 
-.menu{
+.menu {
   display: flex;
   flex-wrap: wrap;
   text-align: center;
@@ -26,19 +26,19 @@
   gap: 124px;
 }
 
-.menu img{
+.menu img {
   margin-bottom: 32px;
 }
 
-.menu h3{
+.menu h3 {
   font-weight: 400;
   font-size: 24px;
   line-height: 36px;
 }
 
-.button{
+.button {
   padding: 1rem 2rem;
-  background: linear-gradient(#635954, #40322b );
+  background: linear-gradient(#635954, #40322b);
   border-radius: 10px;
   border: 1px;
   margin-top: 64px;
@@ -48,7 +48,7 @@
   margin-bottom: 1rem;
 }
 
-.button a{
+.button a {
   font-weight: 400;
   line-height: 36px;
   color: #fff;
@@ -56,20 +56,17 @@
   text-decoration: none;
 }
 
-
-@media (max-width:850px) {
-  .menu{
+@media (max-width: 850px) {
+  .menu {
     gap: 64px;
   }
-
-  
 }
 
-@media (max-width:450px) {
-  .button{
+@media (max-width: 450px) {
+  .menu-container > button {
     padding: 0.8rem;
   }
-  .button a{
+  .menu-container > button {
     font-size: 19px;
   }
 }

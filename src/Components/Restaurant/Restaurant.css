@@ -4,14 +4,15 @@
   background: url('../../assets/bg-restaurant.png');
   align-items: center;
   justify-content: space-between;
+  gap: 5px;
 }
 
 .restaurant {
-  padding-right: 100px;
+  padding-right: 144px;
 }
 
 .restaurantimg {
-  padding-left: 144px;
+  padding-left: 100px;
   max-width: 100%;
   margin-top: 10px;
 }
@@ -21,10 +22,11 @@
   font-family: Urbanist;
   color: #534944;
   display: flex;
+  flex-wrap: wrap;
 }
 
 .restaurant p {
-  max-width: 586px;
+  max-width: 569px;
   font-size: 20px;
   font-family: Poppins;
 }
@@ -59,7 +61,17 @@
   .restaurantimg {
     padding-left: 0px;
   }
-  .restaurant > button{
+  .restaurant > button {
     margin-top: 30px;
+  }
+}
+
+@media (max-width: 500px) {
+  .restaurant h2 > img {
+    width: 60px;
+    height: 60px;
+  }
+  .restaurant h2 {
+    font-size: 52px;
   }
 }

@@ -62,3 +62,22 @@
     margin-top: 30px;
   }
 }
+
+
+@media (max-width: 490px) {
+  .delivery > button{
+      padding: 0.8rem;
+  }
+  .delivery > button a{
+      font-size: 19px;
+  }
+}
+
+@media (max-width: 460px) {
+  .delivery > button{
+      padding: 0.8rem;
+  }
+  .delivery > button a{
+      font-size: 17px;
+  }
+}
