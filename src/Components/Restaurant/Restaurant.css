@@ -1,9 +1,9 @@
 .restaurant-container {
   display: flex;
   min-height: 576px;
-  background: url('../../assets/bg-restaurant.png');
+  background: url("../../assets/bg-restaurant.png");
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   gap: 5px;
 }
 
@@ -23,12 +23,20 @@
   color: #534944;
   display: flex;
   flex-wrap: wrap;
+  padding-left: 1rem;
 }
 
 .restaurant p {
   max-width: 569px;
   font-size: 20px;
   font-family: Poppins;
+  padding-left: 1rem;
+}
+
+.restaurant > h2 > img {
+  height: 64px;
+  width: 64px;
+  margin-right: 2rem;
 }
 
 .restaurant p > span {

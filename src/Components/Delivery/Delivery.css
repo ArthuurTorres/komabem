@@ -1,13 +1,14 @@
 .delivery-container {
   display: flex;
   min-height: 576px;
-  background: url('../../assets/bg-delivery.png');
+  background: url("../../assets/bg-delivery.png");
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 .delivery {
   padding-left: 100px;
+  padding-right: 1rem;
 }
 
 .deliveryimg {
@@ -20,12 +21,24 @@
   font-family: Urbanist;
   color: #534944;
   display: flex;
+  justify-content: end;
+}
+
+.delivery > h2 > img {
+  height: 64px;
+  width: 85px;
+  margin-left: 2rem;
+}
+
+.delivery > .button {
+  float: right;
 }
 
 .delivery p {
   max-width: 586px;
   font-size: 20px;
   font-family: Poppins;
+  text-align: right;
 }
 
 .delivery p > span {
@@ -58,26 +71,29 @@
   .deliveryimg {
     padding-right: 0px;
   }
-  .delivery > button{
+  .delivery > p {
+    text-align: center;
+  }
+  .delivery > .button {
     margin-top: 30px;
+    float: none;
   }
 }
 
-
 @media (max-width: 490px) {
-  .delivery > button{
-      padding: 0.8rem;
+  .delivery > button {
+    padding: 0.8rem;
   }
-  .delivery > button a{
-      font-size: 19px;
+  .delivery > button a {
+    font-size: 19px;
   }
 }
 
 @media (max-width: 460px) {
-  .delivery > button{
-      padding: 0.8rem;
+  .delivery > button {
+    padding: 0.8rem;
   }
-  .delivery > button a{
-      font-size: 17px;
+  .delivery > button a {
+    font-size: 17px;
   }
 }

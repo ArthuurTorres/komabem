@@ -1,32 +1,38 @@
-.container-header{
+.container-header {
   min-height: 96px;
-  background: url('../../assets/bg-header.jpg');
   background-position: left;
   display: flex;
   text-align: center;
   justify-content: center;
   align-items: center;
+  position: absolute;
+  width: 100%;
+  background: linear-gradient(
+    180deg,
+    rgb(216, 186, 165, 0.5),
+    rgb(216, 186, 165, 0.1)
+  );
 }
 
-.menu-header{
+.menu-header {
   display: flex;
   gap: 32px;
 }
 
-.menu-header a{
+.menu-header a {
   text-decoration: none;
-  color: #635750;
+  color: white;
   font-size: 24px;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
-@media (max-width:450px){
-  .menu-header{
+@media (max-width: 450px) {
+  .menu-header {
     display: grid;
     grid-template-columns: 1fr;
     gap: 10px;
   }
-  .menu-header a{
+  .menu-header a {
     text-decoration: underline;
   }
 }

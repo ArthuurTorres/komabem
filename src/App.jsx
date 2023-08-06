@@ -5,7 +5,8 @@ import Intro from './Components/Intro/Intro'
 import Delivery from './Components/Delivery/Delivery'
 import Restaurant from './Components/Restaurant/Restaurant'
 import Contact from './Components/Contact/Contact'
-import Footer from "./Components/Footer/Footer"
+import Footer from './Components/Footer/Footer'
+import MenuList from './Components/MenuList/MenuList'
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Menu />
         <Delivery />
         <Restaurant />
+        <MenuList />
         <Contact />
         <Footer />
       </div>

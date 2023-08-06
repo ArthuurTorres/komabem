@@ -8,8 +8,8 @@ const Delivery = () => {
     <div className="delivery-container">
       <div className="delivery">
       <h2>
-        <img src={imgdeli} alt="Delivery" />
-        Delivery
+          Delivery
+          <img src={imgdeli} alt="Delivery" />
       </h2>
       <p>
         Nossa entrega em domicílio foi cuidadosamente projetada para garantir
