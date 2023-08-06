@@ -4,6 +4,7 @@ import tel from '../../assets/telephone.png'
 
 const Contact = () => {
   return (
+    <section id="contact">
     <div className="footer-container">
       <div>
         <h2>
@@ -30,6 +31,7 @@ const Contact = () => {
         </ul>
       </div>
     </div>
+    </section>
   )
 }
 

@@ -80,7 +80,7 @@
   }
 }
 
-@media (max-width: 490px) {
+@media (max-width: 590px) {
   .delivery > button {
     padding: 0.8rem;
   }

@@ -1,4 +1,4 @@
-.footer-container{
+.footer-container {
   min-height: 480px;
   display: flex;
   flex-wrap: wrap;
@@ -8,7 +8,7 @@
   background: url('../../assets/bg-delivery.png');
 }
 
-ul{
+ul {
   list-style: none;
   display: flex;
   flex-direction: column;
@@ -16,17 +16,18 @@ ul{
   font-family: Poppins;
 }
 
-.footer-container h2{
+.footer-container h2 {
   margin-bottom: 24px;
   display: flex;
   align-items: center;
   gap: 14px;
   font-size: 48px;
   line-height: 72px;
+  font-family: Poppins;
 }
 
-@media (max-width:730px){
-  .footer-container{
+@media (max-width: 730px) {
+  .footer-container {
     gap: 10px;
     padding-top: 15px;
     display: grid;

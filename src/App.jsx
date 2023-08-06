@@ -7,6 +7,7 @@ import Restaurant from './Components/Restaurant/Restaurant'
 import Contact from './Components/Contact/Contact'
 import Footer from './Components/Footer/Footer'
 import MenuList from './Components/MenuList/MenuList'
+import Whatsapp from "./Components/Whatsapp/Whatsapp"
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <MenuList />
         <Contact />
         <Footer />
+        <Whatsapp />
       </div>
     </>
   )

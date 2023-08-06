@@ -34,6 +34,7 @@ const MenuList = () => {
   };
 
   return (
+    <section id="menulist">
     <div className="menu-list">
       <h1>Faça seu pedido</h1>
       <div className="class-selector">
@@ -123,6 +124,7 @@ const MenuList = () => {
         </button>
       </div>
     </div>
+    </section>
   );
 };
 

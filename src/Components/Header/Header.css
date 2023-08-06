@@ -7,11 +7,11 @@
   align-items: center;
   position: absolute;
   width: 100%;
-  background: linear-gradient(
+  /* background: linear-gradient(
     180deg,
-    rgb(216, 186, 165, 0.5),
-    rgb(216, 186, 165, 0.1)
-  );
+    rgb(216, 186, 165, 0.2),
+    rgb(216, 186, 165, 0.3)
+  ); */
 }
 
 .menu-header {
@@ -19,11 +19,34 @@
   gap: 32px;
 }
 
+
 .menu-header a {
   text-decoration: none;
   color: white;
   font-size: 24px;
-  font-family: "Poppins", sans-serif;
+  font-family: 'Poppins', sans-serif;
+  display: inline-block;
+  position: relative;
+}
+
+.menu-header a:after {
+  content: '';
+  display: block;
+  height: 2px;
+  width: 0%;
+  background: #fff;
+  margin-top: 4px;
+  transition: 0.3s;
+  position: absolute;
+}
+
+.menu-header a:hover::after,
+.menu-header a.ativo::after {
+  width: 100%;
+}
+
+.menu-header a:hover{
+  transform: scale(1.25);
 }
 
 @media (max-width: 450px) {

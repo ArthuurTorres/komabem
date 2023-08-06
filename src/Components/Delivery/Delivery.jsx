@@ -5,6 +5,7 @@ import deliveryr from '../../assets/deliveryr.png'
 
 const Delivery = () => {
   return (
+    <section id="delivery">
     <div className="delivery-container">
       <div className="delivery">
       <h2>
@@ -24,6 +25,7 @@ const Delivery = () => {
       <img className="deliveryimg" src={deliveryr} alt="Entregador"/>
       </div>
     </div>
+    </section>
   )
 }
 
