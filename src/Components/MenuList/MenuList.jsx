@@ -7,13 +7,14 @@ const MenuList = () => {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
+    setValue,
   } = useForm();
 
   const [itemClass, setItemClass] = useState("class1");
   const [cart, setCart] = useState([]);
   const [selectedRow, setSelectedRow] = useState([]);
+  const [cartString, setCartString] = useState("");
 
   //items data
   const items = {
@@ -43,8 +44,9 @@ const MenuList = () => {
     ],
   };
 
-  //Add style on selected row
+  //Add style on selected row and format cart to submit
   useEffect(() => {
+    //Selected rows
     let selectedRowHandler = [];
 
     cart.map((i) => {
@@ -52,7 +54,22 @@ const MenuList = () => {
     });
 
     setSelectedRow(selectedRowHandler);
+
+    //Cart to string
+    setCartString(
+      cart.map(
+        (i) =>
+          "Id: " + i.id + " - Nome: " + i.name + " - Quantidade: " + i.quantity
+      )
+    );
   }, [cart]);
+
+  useEffect(() => {
+    setValue(
+      "cartInput",
+      JSON.stringify(cartString).replace(/[\[\].!'@,><|//\\;&*()_+=]/g, "")
+    );
+  }, [cartString]);
 
   //Submit form
   const onSubmit = (data) => console.log(data);
@@ -79,6 +96,7 @@ const MenuList = () => {
             classe 2
           </button>
         </div>
+
         <div className="table-handler">
           <table>
             <thead>
@@ -196,6 +214,7 @@ const MenuList = () => {
             </tbody>
           </table>
         </div>
+
         <div className="button-handler">
           <button
             className="button"
@@ -294,11 +313,12 @@ const MenuList = () => {
                   type="tel"
                   placeholder="Telefone"
                   name="phone"
-                  maxLength="16"
+                  maxLength="15"
+                  minLength="14"
                   {...register("phone", {
                     required: true,
                     maxLength: 16,
-                    minLength: 15,
+                    minLength: 14,
                   })}
                   className={errors.phone ? "error-input" : ""}
                   onKeyUp={(e) => {
@@ -353,7 +373,7 @@ const MenuList = () => {
             </div>
 
             <label htmlFor="items">Pratos selecionados</label>
-            <div name="items" classname="cartItems">
+            <div name="items" className="cartItems">
               {/* Selected items table */}
               <div className="table-handler">
                 <table>
@@ -438,6 +458,12 @@ const MenuList = () => {
                 </table>
               </div>
             </div>
+
+            <input
+              type="hidden"
+              name="cartInput"
+              {...register("cartInput")}
+            ></input>
 
             <button
               className="button"

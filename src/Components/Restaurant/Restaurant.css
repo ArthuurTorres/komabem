@@ -1,7 +1,6 @@
 .restaurant-container {
   display: flex;
   min-height: 576px;
-  background: url("../../assets/bg-restaurant.png");
   align-items: center;
   justify-content: center;
   gap: 5px;
