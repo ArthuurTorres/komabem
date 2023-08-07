@@ -7,7 +7,7 @@ const Delivery = () => {
   return (
     <section id="delivery">
     <div className="delivery-container">
-      <div className="delivery">
+      <div className="delivery" data-aos="fade-up">
       <h2>
           Delivery
           <img src={imgdeli} alt="Delivery" />
@@ -17,11 +17,11 @@ const Delivery = () => {
         que você possa desfrutar dos nossos pratos exclusivos sem sair do
         conforto do seu lar.<br></br><span>* Taxa e área de entrega sob consulta.</span>
       </p>
-      <button className="button">
+      <button className="button" data-aos="zoom-in-right">
         <a href="#">FAÇA SEU PEDIDO VIA WHATSAPP <img src={whatsapp} alt="whatsapp button" /></a>
       </button>
       </div>
-      <div>
+      <div data-aos="fade-down">
       <img className="deliveryimg" src={deliveryr} alt="Entregador"/>
       </div>
     </div>

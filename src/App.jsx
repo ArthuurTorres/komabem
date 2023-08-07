@@ -8,8 +8,15 @@ import Contact from './Components/Contact/Contact'
 import Footer from './Components/Footer/Footer'
 import MenuList from './Components/MenuList/MenuList'
 import Whatsapp from "./Components/Whatsapp/Whatsapp"
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+
+
 
 function App() {
+
+  AOS.init();
+
   return (
     <>
       <div>

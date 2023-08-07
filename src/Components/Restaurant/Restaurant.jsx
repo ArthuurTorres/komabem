@@ -5,10 +5,10 @@ import restaurantl from '../../assets/restaurantl.png'
 const Restaurant = () => {
   return (
     <div className="restaurant-container">
-      <div>
+      <div data-aos="fade-up">
         <img className="restaurantimg" src={restaurantl} alt="Entregador" />
       </div>
-      <div className="restaurant">
+      <div className="restaurant" data-aos="fade-down">
         <h2>
           <img src={restaurant} alt="Delivery" />O Restaurante
         </h2>

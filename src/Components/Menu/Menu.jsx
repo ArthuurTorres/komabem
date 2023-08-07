@@ -7,23 +7,23 @@ const Menu = () => {
   return (
     <section id="menu">
       <div className="menu-container">
-        <h2>Cardápio</h2>
+        <h2 data-aos="fade-up">Cardápio</h2>
         <div className="menu">
-          <div>
+          <div data-aos="fade-up" data-aos-delay="100">
             <img src={img1} alt="" />
             <h3>Aves</h3>
           </div>
-          <div>
+          <div data-aos="fade-up" data-aos-delay="200">
             <img src={img2} alt="" />
             <h3>Carnes</h3>
           </div>
-          <div>
+          <div data-aos="fade-up" data-aos-delay="300">
             <img src={img3} alt="" />
             <h3>Peixes</h3>
           </div>
         </div>
-        <button className="button">
-          <a href="#">VEJA O CARDÁPIO COMPLETO</a>
+        <button className="button" data-aos="zoom-in-right">
+          <a href="#menulist">VEJA O CARDÁPIO COMPLETO</a>
         </button>
       </div>
     </section>

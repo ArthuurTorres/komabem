@@ -8,7 +8,7 @@
 
 #whatsapp-button img {
   width: 64px; /* Ajuste o tamanho do ícone conforme necessário */
-  border-radius: 50%;
+  /* border-radius: 50%; */
   /* box-shadow: 0 0px 3px rgba(0, 0, 0, 0.3); */
 }
 
