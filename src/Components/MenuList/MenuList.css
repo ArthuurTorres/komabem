@@ -75,15 +75,31 @@
 
 .menu-list > .form {
   background-color: #e9c5af;
-  width: 40%;
-  height: 80%;
+  width: 100%;
+  height: 100%;
   position: fixed;
-  top: 10%;
+  top: 0;
   left: auto;
   align-items: center;
-  border-radius: 1rem;
   flex-direction: column;
   display: none;
+}
+
+.menu-list > .alert {
+  background-color: #e9c5af;
+  width: 50%;
+  min-height: 10%;
+  position: fixed;
+  top: 10%;
+  border-radius: 1rem;
+  left: auto;
+  align-items: center;
+  flex-direction: column;
+  display: none;
+}
+
+.menu-list > .alert > p {
+  padding: 1.25rem 3rem 1.25rem 1.25rem;
 }
 
 .menu-list > .form > h1 {
@@ -96,19 +112,6 @@
   flex-direction: column;
 }
 
-.menu-list > .form > form > input {
-  height: 2.5rem;
-}
-
-.menu-list > .form > form > input,
-.menu-list > .form > form > textarea {
-  width: 100%;
-}
-
-.menu-list > .form > form > textarea {
-  text-align: left;
-}
-
 #closeForm {
   margin-left: 2rem;
   position: absolute;
@@ -116,15 +119,57 @@
   right: 1rem;
 }
 
-#closeForm:hover {
+#closeForm:hover,
+.bi-cart-x:hover {
   cursor: pointer;
+  color: #cc0000;
+}
+
+.bi-cart-plus:hover {
+  cursor: pointer;
+  color: #006400;
+}
+
+.form-inputs {
+  display: flex;
+  flex-direction: row;
+}
+
+.form-input {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  padding: 2rem;
+}
+
+.form-input > input {
+  width: 100%;
+  height: 2.5rem;
+}
+
+.error-input {
+  border: solid 2px #cc0000;
+}
+
+.error {
+  color: #cc0000;
+}
+
+.cartItems {
+  max-height: 20%;
+  overflow: auto;
 }
 
 @media (max-width: 1250px) {
-  .menu-list > .form {
+  .form-inputs {
+    display: flex;
+    flex-direction: column;
+  }
+  .form-input {
     width: 100%;
-    height: 90%;
-    top: 5%;
-    border-radius: 0rem;
+  }
+
+  .menu-list > .alert {
+    width: 80%;
   }
 }

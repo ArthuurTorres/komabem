@@ -1,12 +1,21 @@
 import "./MenuList.css";
 import { useState, useEffect } from "react";
 import whatsapp from "../../assets/whatsapp.png";
+import { useForm } from "react-hook-form";
 
 const MenuList = () => {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+
   const [itemClass, setItemClass] = useState("class1");
   const [cart, setCart] = useState([]);
   const [selectedRow, setSelectedRow] = useState([]);
 
+  //items data
   const items = {
     class1: [
       {
@@ -34,6 +43,7 @@ const MenuList = () => {
     ],
   };
 
+  //Add style on selected row
   useEffect(() => {
     let selectedRowHandler = [];
 
@@ -43,6 +53,9 @@ const MenuList = () => {
 
     setSelectedRow(selectedRowHandler);
   }, [cart]);
+
+  //Submit form
+  const onSubmit = (data) => console.log(data);
 
   return (
     <section id="menulist">
@@ -100,6 +113,8 @@ const MenuList = () => {
                     <input
                       type="number"
                       defaultValue="1"
+                      min="1"
+                      max="20"
                       id={"quantity" + i.id}
                       onChange={(e) => {
                         let cartHandler = [...cart];
@@ -185,11 +200,40 @@ const MenuList = () => {
           <button
             className="button"
             onClick={() => {
-              document.getElementById("form").style.display = "flex";
+              if (cart.length === 0) {
+                document.getElementById("alert").style.display = "flex";
+              } else {
+                document.getElementById("form").style.display = "flex";
+              }
             }}
           >
             CONFIRME SEU PEDIDO <img src={whatsapp} alt="whatsapp button" />
           </button>
+        </div>
+
+        {/* Float alert */}
+        <div className="alert" id="alert">
+          <span
+            id="closeForm"
+            onClick={() => {
+              document.getElementById("alert").style.display = "none";
+            }}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="2rem"
+              height="2rem"
+              fill="currentColor"
+              className="bi bi-x-circle"
+              viewBox="0 0 16 16"
+            >
+              <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+              <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+            </svg>
+          </span>
+          <p>
+            Adicione ao menos um prato ao seu carrinho para confirmar o pedido.
+          </p>
         </div>
 
         {/* Float form */}
@@ -215,13 +259,101 @@ const MenuList = () => {
               </svg>
             </span>
           </h1>
-          <form action="#">
-            <label htmlFor="name">Nome</label>
-            <input type="text" placeholder="Seu Nome" name="name" />
-            <label htmlFor="phone">Telefone</label>
-            <input type="text" placeholder="Telefone" name="phone"></input>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <div className="form-inputs">
+              <div className="form-input">
+                <label htmlFor="name">Nome</label>
+                <input
+                  type="text"
+                  placeholder="Seu Nome"
+                  name="name"
+                  className={errors.name ? "error-input" : ""}
+                  {...register("name", {
+                    required: "true",
+                    maxLength: 100,
+                    minLength: 3,
+                  })}
+                />
+                {errors.name?.type === "required" && (
+                  <span className="error">Você deve preencher seu nome.</span>
+                )}
+                {errors.name?.type === "minLength" && (
+                  <span className="error">
+                    O nome preenchido deve ter no mínimo 3 caracteres.
+                  </span>
+                )}
+                {errors.name?.type === "maxLength" && (
+                  <span className="error">
+                    O nome preenchido deve ter no máximo 100 caracteres.
+                  </span>
+                )}
+              </div>
+              <div className="form-input">
+                <label htmlFor="phone">Telefone</label>
+                <input
+                  type="tel"
+                  placeholder="Telefone"
+                  name="phone"
+                  maxLength="16"
+                  {...register("phone", {
+                    required: true,
+                    maxLength: 16,
+                    minLength: 15,
+                  })}
+                  className={errors.phone ? "error-input" : ""}
+                  onKeyUp={(e) => {
+                    const phoneMask = (value) => {
+                      //Remove non numerics
+                      const cleanedValue = value.replace(/\D/g, "");
+
+                      // Verify if is cellphone (9 dígitos) or usual telephone (8 dígitos)
+                      const isCellPhone =
+                        cleanedValue.length === 12 ||
+                        cleanedValue.length === 11;
+
+                      if (isCellPhone) {
+                        // Cellphone format (xx) x xxxx-xxxx
+                        return `(${cleanedValue.slice(
+                          0,
+                          2
+                        )}) ${cleanedValue.slice(2, 3)} ${cleanedValue.slice(
+                          3,
+                          7
+                        )}-${cleanedValue.slice(7)}`;
+                      } else {
+                        // Usual telephone format: (xx) xxxx-xxxx
+                        return `(${cleanedValue.slice(
+                          0,
+                          2
+                        )}) ${cleanedValue.slice(2, 6)}-${cleanedValue.slice(
+                          6
+                        )}`;
+                      }
+                    };
+
+                    e.target.value = phoneMask(e.target.value);
+                  }}
+                ></input>
+                {errors.phone?.type === "required" && (
+                  <span className="error">
+                    Você deve preencher seu telefone.
+                  </span>
+                )}
+                {errors.phone?.type === "minLength" && (
+                  <span className="error">
+                    O número preenchido deve ter no mínimo 10 caracteres.
+                  </span>
+                )}
+                {errors.phone?.type === "maxLength" && (
+                  <span className="error">
+                    O número preenchido deve ter no mínimo 11 caracteres.
+                  </span>
+                )}
+              </div>
+            </div>
+
             <label htmlFor="items">Pratos selecionados</label>
-            <div name="items">
+            <div name="items" classname="cartItems">
               {/* Selected items table */}
               <div className="table-handler">
                 <table>
@@ -253,6 +385,8 @@ const MenuList = () => {
                             type="number"
                             value={i.quantity}
                             id={"quantity" + i.id}
+                            min="1"
+                            max="20"
                             onChange={(e) => {
                               let cartHandler = [...cart];
                               if (
@@ -266,7 +400,6 @@ const MenuList = () => {
                                   )
                                 ].quantity = e.target.value;
                                 setCart(cartHandler);
-                                console.log(cart);
                               }
                             }}
                           ></input>
@@ -305,6 +438,14 @@ const MenuList = () => {
                 </table>
               </div>
             </div>
+
+            <button
+              className="button"
+              type="submit"
+              disabled={cart.length === 0 ? true : false}
+            >
+              CONFIRME SEU PEDIDO <img src={whatsapp} alt="whatsapp button" />
+            </button>
           </form>
         </div>
       </div>
