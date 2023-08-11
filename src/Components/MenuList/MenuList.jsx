@@ -2,6 +2,10 @@ import "./MenuList.css";
 import { useState, useEffect } from "react";
 import whatsapp from "../../assets/whatsapp.png";
 import { useForm } from "react-hook-form";
+import lottie from "lottie-web";
+import { defineElement } from "lord-icon-element";
+
+defineElement(lottie.loadAnimation);
 
 const MenuList = () => {
   const {
@@ -14,6 +18,7 @@ const MenuList = () => {
   const [itemClass, setItemClass] = useState("class1");
   const [cart, setCart] = useState([]);
   const [selectedRow, setSelectedRow] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const [cartString, setCartString] = useState("");
 
   //items data
@@ -59,7 +64,13 @@ const MenuList = () => {
     setCartString(
       cart.map(
         (i) =>
-          "Id: " + i.id + " - Nome: " + i.name + " - Quantidade: " + i.quantity
+          "{Id: " +
+          i.id +
+          " - Nome: " +
+          i.name +
+          " - Quantidade: " +
+          i.quantity +
+          "}"
       )
     );
   }, [cart]);
@@ -67,12 +78,24 @@ const MenuList = () => {
   useEffect(() => {
     setValue(
       "cartInput",
-      JSON.stringify(cartString).replace(/[\[\].!'@,><|//\\;&*()_+=]/g, "")
+      JSON.stringify(cartString).replace(/[\[\].!'@,><|//\\;&*()_+="]/g, "")
     );
   }, [cartString]);
 
   //Submit form
-  const onSubmit = (data) => console.log(data);
+  async function onSubmit() {
+    setIsLoading(true);
+    fetch(
+      "https://www.gorillabyte.com.br/api/sendEmail?" +
+        new URLSearchParams(new FormData(document.getElementById("formulary"))),
+      {
+        method: "post",
+      }
+    )
+      .then((response) => response.json())
+      .then((json) => setIsLoading({ success: json.message }))
+      .catch((err) => setIsLoading({ error: json.message + " " + err }));
+  }
 
   return (
     <section id="menulist">
@@ -257,222 +280,312 @@ const MenuList = () => {
 
         {/* Float form */}
         <div className="form" id="form">
-          <h1>
-            CONFIRME SEU PEDIDO{" "}
-            <span
-              id="closeForm"
-              onClick={() => {
-                document.getElementById("form").style.display = "none";
-              }}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="2rem"
-                height="2rem"
-                fill="currentColor"
-                className="bi bi-x-circle"
-                viewBox="0 0 16 16"
-              >
-                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
-              </svg>
-            </span>
-          </h1>
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="form-inputs">
-              <div className="form-input">
-                <label htmlFor="name">Nome</label>
-                <input
-                  type="text"
-                  placeholder="Seu Nome"
-                  name="name"
-                  className={errors.name ? "error-input" : ""}
-                  {...register("name", {
-                    required: "true",
-                    maxLength: 100,
-                    minLength: 3,
-                  })}
-                />
-                {errors.name?.type === "required" && (
-                  <span className="error">Você deve preencher seu nome.</span>
-                )}
-                {errors.name?.type === "minLength" && (
-                  <span className="error">
-                    O nome preenchido deve ter no mínimo 3 caracteres.
+          {isLoading ? (
+            <>
+              {isLoading === true ? (
+                <>
+                  <lord-icon
+                    src="/src/assets/apple.json"
+                    trigger="loop"
+                    delay="2000"
+                  ></lord-icon>
+                  <p>Loading...</p>
+                </>
+              ) : (
+                <></>
+              )}
+              {isLoading.success ? (
+                <>
+                  <span
+                    id="closeForm"
+                    onClick={() => {
+                      document.getElementById("form").style.display = "none";
+                    }}
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="2rem"
+                      height="2rem"
+                      fill="currentColor"
+                      className="bi bi-x-circle"
+                      viewBox="0 0 16 16"
+                    >
+                      <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                      <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                    </svg>
                   </span>
-                )}
-                {errors.name?.type === "maxLength" && (
-                  <span className="error">
-                    O nome preenchido deve ter no máximo 100 caracteres.
+                  <lord-icon
+                    src="/src/assets/confetti.json"
+                    trigger="loop"
+                    delay="2000"
+                  ></lord-icon>
+                  <p>
+                    Sucesso: Sua mensagem foi enviada. Retornaremos seu contato
+                    em breve. em breve.
+                  </p>
+                  <small>{isLoading.success}</small>
+                </>
+              ) : (
+                <></>
+              )}
+              {isLoading.error ? (
+                <>
+                  <span
+                    id="closeForm"
+                    onClick={() => {
+                      document.getElementById("form").style.display = "none";
+                    }}
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="2rem"
+                      height="2rem"
+                      fill="currentColor"
+                      className="bi bi-x-circle"
+                      viewBox="0 0 16 16"
+                    >
+                      <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                      <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                    </svg>
                   </span>
-                )}
-              </div>
-              <div className="form-input">
-                <label htmlFor="phone">Telefone</label>
-                <input
-                  type="tel"
-                  placeholder="Telefone"
-                  name="phone"
-                  maxLength="15"
-                  minLength="14"
-                  {...register("phone", {
-                    required: true,
-                    maxLength: 16,
-                    minLength: 14,
-                  })}
-                  className={errors.phone ? "error-input" : ""}
-                  onKeyUp={(e) => {
-                    const phoneMask = (value) => {
-                      //Remove non numerics
-                      const cleanedValue = value.replace(/\D/g, "");
-
-                      // Verify if is cellphone (9 dígitos) or usual telephone (8 dígitos)
-                      const isCellPhone =
-                        cleanedValue.length === 12 ||
-                        cleanedValue.length === 11;
-
-                      if (isCellPhone) {
-                        // Cellphone format (xx) x xxxx-xxxx
-                        return `(${cleanedValue.slice(
-                          0,
-                          2
-                        )}) ${cleanedValue.slice(2, 3)} ${cleanedValue.slice(
-                          3,
-                          7
-                        )}-${cleanedValue.slice(7)}`;
-                      } else {
-                        // Usual telephone format: (xx) xxxx-xxxx
-                        return `(${cleanedValue.slice(
-                          0,
-                          2
-                        )}) ${cleanedValue.slice(2, 6)}-${cleanedValue.slice(
-                          6
-                        )}`;
-                      }
-                    };
-
-                    e.target.value = phoneMask(e.target.value);
+                  <lord-icon
+                    src="/src/assets/error.json"
+                    trigger="loop"
+                    delay="2000"
+                  ></lord-icon>
+                  <p>Erro: O suporte técnco já está cuidando disso.</p>
+                  <small>{isLoading.error}</small>
+                </>
+              ) : (
+                <></>
+              )}
+            </>
+          ) : (
+            <>
+              <h1>
+                CONFIRME SEU PEDIDO{" "}
+                <span
+                  id="closeForm"
+                  onClick={() => {
+                    document.getElementById("form").style.display = "none";
                   }}
-                ></input>
-                {errors.phone?.type === "required" && (
-                  <span className="error">
-                    Você deve preencher seu telefone.
-                  </span>
-                )}
-                {errors.phone?.type === "minLength" && (
-                  <span className="error">
-                    O número preenchido deve ter no mínimo 10 caracteres.
-                  </span>
-                )}
-                {errors.phone?.type === "maxLength" && (
-                  <span className="error">
-                    O número preenchido deve ter no mínimo 11 caracteres.
-                  </span>
-                )}
-              </div>
-            </div>
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="2rem"
+                    height="2rem"
+                    fill="currentColor"
+                    className="bi bi-x-circle"
+                    viewBox="0 0 16 16"
+                  >
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                  </svg>
+                </span>
+              </h1>
+              <form onSubmit={handleSubmit(onSubmit)} id="formulary">
+                <div className="form-inputs">
+                  <div className="form-input">
+                    <label htmlFor="name">Nome</label>
+                    <input
+                      type="text"
+                      placeholder="Seu Nome"
+                      name="name"
+                      className={errors.name ? "error-input" : ""}
+                      {...register("name", {
+                        required: "true",
+                        maxLength: 100,
+                        minLength: 3,
+                      })}
+                    />
+                    {errors.name?.type === "required" && (
+                      <span className="error">
+                        Você deve preencher seu nome.
+                      </span>
+                    )}
+                    {errors.name?.type === "minLength" && (
+                      <span className="error">
+                        O nome preenchido deve ter no mínimo 3 caracteres.
+                      </span>
+                    )}
+                    {errors.name?.type === "maxLength" && (
+                      <span className="error">
+                        O nome preenchido deve ter no máximo 100 caracteres.
+                      </span>
+                    )}
+                  </div>
+                  <div className="form-input">
+                    <label htmlFor="phone">Telefone</label>
+                    <input
+                      type="tel"
+                      placeholder="Telefone"
+                      name="phone"
+                      maxLength="15"
+                      minLength="14"
+                      {...register("phone", {
+                        required: true,
+                        maxLength: 16,
+                        minLength: 14,
+                      })}
+                      className={errors.phone ? "error-input" : ""}
+                      onKeyUp={(e) => {
+                        const phoneMask = (value) => {
+                          //Remove non numerics
+                          const cleanedValue = value.replace(/\D/g, "");
 
-            <label htmlFor="items">Pratos selecionados</label>
-            <div name="items" className="cartItems">
-              {/* Selected items table */}
-              <div className="table-handler">
-                <table>
-                  <thead>
-                    <tr className="dark-row">
-                      <td>N° de identificação</td>
-                      <td>Nome</td>
-                      <td>Preço</td>
-                      <td>Quantidade</td>
-                      <td>Remover do carrinho</td>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {cart.map((i) => (
-                      <tr
-                        className={i.id % 2 === 0 ? "dark-row" : ""}
-                        key={i.id}
-                      >
-                        <td>{i.id}</td>
-                        <td>{i.name}</td>
-                        <td>
-                          {new Intl.NumberFormat("pt-br", {
-                            style: "currency",
-                            currency: "BRL",
-                          }).format(parseInt(i.value) / 100)}
-                        </td>
-                        <td>
-                          <input
-                            type="number"
-                            value={i.quantity}
-                            id={"quantity" + i.id}
-                            min="1"
-                            max="20"
-                            onChange={(e) => {
-                              let cartHandler = [...cart];
-                              if (
-                                cartHandler.findIndex(
-                                  (item) => item.id === i.id
-                                ) !== -1
-                              ) {
-                                cartHandler[
-                                  cartHandler.findIndex(
-                                    (item) => item.id === i.id
-                                  )
-                                ].quantity = e.target.value;
-                                setCart(cartHandler);
-                              }
-                            }}
-                          ></input>
-                        </td>
-                        <td>
-                          <button
-                            onClick={() => {
-                              //Remove item from cart
-                              let cartHandler = [...cart];
-                              cartHandler.splice(
-                                cartHandler.findIndex(
-                                  (item) => item.id === i.id
-                                ),
-                                1
-                              );
-                              setCart(cartHandler);
-                            }}
-                            className="add-cart-button"
+                          // Verify if is cellphone (9 dígitos) or usual telephone (8 dígitos)
+                          const isCellPhone =
+                            cleanedValue.length === 12 ||
+                            cleanedValue.length === 11;
+
+                          if (isCellPhone) {
+                            // Cellphone format (xx) x xxxx-xxxx
+                            return `(${cleanedValue.slice(
+                              0,
+                              2
+                            )}) ${cleanedValue.slice(
+                              2,
+                              3
+                            )} ${cleanedValue.slice(3, 7)}-${cleanedValue.slice(
+                              7
+                            )}`;
+                          } else {
+                            // Usual telephone format: (xx) xxxx-xxxx
+                            return `(${cleanedValue.slice(
+                              0,
+                              2
+                            )}) ${cleanedValue.slice(
+                              2,
+                              6
+                            )}-${cleanedValue.slice(6)}`;
+                          }
+                        };
+
+                        e.target.value = phoneMask(e.target.value);
+                      }}
+                    ></input>
+                    {errors.phone?.type === "required" && (
+                      <span className="error">
+                        Você deve preencher seu telefone.
+                      </span>
+                    )}
+                    {errors.phone?.type === "minLength" && (
+                      <span className="error">
+                        O número preenchido deve ter no mínimo 10 caracteres.
+                      </span>
+                    )}
+                    {errors.phone?.type === "maxLength" && (
+                      <span className="error">
+                        O número preenchido deve ter no mínimo 11 caracteres.
+                      </span>
+                    )}
+                  </div>
+                </div>
+
+                <label htmlFor="items">Pratos selecionados</label>
+                <div name="items" className="cartItems">
+                  {/* Selected items table */}
+                  <div className="table-handler">
+                    <table>
+                      <thead>
+                        <tr className="dark-row">
+                          <td>N° de identificação</td>
+                          <td>Nome</td>
+                          <td>Preço</td>
+                          <td>Quantidade</td>
+                          <td>Remover do carrinho</td>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {cart.map((i) => (
+                          <tr
+                            className={i.id % 2 === 0 ? "dark-row" : ""}
+                            key={i.id}
                           >
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              width="32"
-                              height="32"
-                              fill="currentColor"
-                              className="bi bi-cart-x"
-                              viewBox="0 0 16 16"
-                            >
-                              <path d="M7.354 5.646a.5.5 0 1 0-.708.708L7.793 7.5 6.646 8.646a.5.5 0 1 0 .708.708L8.5 8.207l1.146 1.147a.5.5 0 0 0 .708-.708L9.207 7.5l1.147-1.146a.5.5 0 0 0-.708-.708L8.5 6.793 7.354 5.646z" />
-                              <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zm3.915 10L3.102 4h10.796l-1.313 7h-8.17zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
-                            </svg>
-                          </button>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
+                            <td>{i.id}</td>
+                            <td>{i.name}</td>
+                            <td>
+                              {new Intl.NumberFormat("pt-br", {
+                                style: "currency",
+                                currency: "BRL",
+                              }).format(parseInt(i.value) / 100)}
+                            </td>
+                            <td>
+                              <input
+                                type="number"
+                                value={i.quantity}
+                                id={"quantity" + i.id}
+                                min="1"
+                                max="20"
+                                onChange={(e) => {
+                                  let cartHandler = [...cart];
+                                  if (
+                                    cartHandler.findIndex(
+                                      (item) => item.id === i.id
+                                    ) !== -1
+                                  ) {
+                                    cartHandler[
+                                      cartHandler.findIndex(
+                                        (item) => item.id === i.id
+                                      )
+                                    ].quantity = e.target.value;
+                                    setCart(cartHandler);
+                                  }
+                                }}
+                              ></input>
+                            </td>
+                            <td>
+                              <button
+                                onClick={() => {
+                                  //Remove item from cart
+                                  let cartHandler = [...cart];
+                                  cartHandler.splice(
+                                    cartHandler.findIndex(
+                                      (item) => item.id === i.id
+                                    ),
+                                    1
+                                  );
+                                  setCart(cartHandler);
+                                }}
+                                className="add-cart-button"
+                              >
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  width="32"
+                                  height="32"
+                                  fill="currentColor"
+                                  className="bi bi-cart-x"
+                                  viewBox="0 0 16 16"
+                                >
+                                  <path d="M7.354 5.646a.5.5 0 1 0-.708.708L7.793 7.5 6.646 8.646a.5.5 0 1 0 .708.708L8.5 8.207l1.146 1.147a.5.5 0 0 0 .708-.708L9.207 7.5l1.147-1.146a.5.5 0 0 0-.708-.708L8.5 6.793 7.354 5.646z" />
+                                  <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zm3.915 10L3.102 4h10.796l-1.313 7h-8.17zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
+                                </svg>
+                              </button>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
 
-            <input
-              type="hidden"
-              name="cartInput"
-              {...register("cartInput")}
-            ></input>
+                <input
+                  type="hidden"
+                  name="cartInput"
+                  {...register("cartInput")}
+                ></input>
 
-            <button
-              className="button"
-              type="submit"
-              disabled={cart.length === 0 ? true : false}
-            >
-              CONFIRME SEU PEDIDO <img src={whatsapp} alt="whatsapp button" />
-            </button>
-          </form>
+                <button
+                  className="button"
+                  type="submit"
+                  disabled={cart.length === 0 ? true : false}
+                >
+                  CONFIRME SEU PEDIDO{" "}
+                  <img src={whatsapp} alt="whatsapp button" />
+                </button>
+              </form>
+            </>
+          )}
         </div>
       </div>
     </section>

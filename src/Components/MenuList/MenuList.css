@@ -8,7 +8,7 @@
   font-family: Poppins;
 }
 
-.menu-list h1{
+.menu-list h1 {
   font-size: 48px;
   font-weight: 500;
 }
@@ -105,6 +105,16 @@
 
 .menu-list > .alert > p {
   padding: 1.25rem 3rem 1.25rem 1.25rem;
+}
+
+.menu-list > .form {
+  align-content: center;
+  justify-content: center;
+}
+
+.menu-list > .form > lord-icon {
+  height: 50%;
+  width: 50%;
 }
 
 .menu-list > .form > h1 {
