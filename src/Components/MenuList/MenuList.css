@@ -88,6 +88,7 @@
   align-items: center;
   flex-direction: column;
   display: none;
+  z-index: 999;
 }
 
 .menu-list > .alert {
@@ -120,6 +121,11 @@
 .menu-list > .form > h1 {
   font-size: 2.5rem;
   padding: 1rem;
+}
+
+.menu-list > .form > h1 > img{
+  background: linear-gradient(#635954, #40322b);
+  border-radius: 100%;
 }
 
 .menu-list > .form > form {

@@ -2,7 +2,7 @@
   position: fixed;
   bottom: 20px; /* Ajuste para a posição vertical */
   right: 20px; /* Ajuste para a posição horizontal */
-  z-index: 999;
+  z-index: 99;
   opacity: 1;
 }
 

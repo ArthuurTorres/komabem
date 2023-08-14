@@ -7,18 +7,37 @@
   align-items: center;
   position: absolute;
   width: 100%;
-  /* background: linear-gradient(
-    180deg,
-    rgb(216, 186, 165, 0.2),
-    rgb(216, 186, 165, 0.3)
-  ); */
+  z-index: 999;
 }
 
 .menu-header {
   display: flex;
   gap: 32px;
+  align-items: center;
 }
 
+.hamburger-icon {
+  display: none; /* Escondendo o ícone de hambúrguer para telas maiores */
+  cursor: pointer;
+  font-size: 42px;
+  margin-left: 10px;
+}
+
+.mobile-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.desktop-menu {
+  display: flex;
+  gap: 32px;
+  align-items: center;
+}
+
+.mobile-menu {
+  flex-direction: column;
+}
 
 .menu-header a {
   text-decoration: none;
@@ -35,27 +54,52 @@
   height: 2px;
   width: 0%;
   background: #fff;
-  margin-top: 4px;
+  margin-top: 1px;
   transition: 0.3s;
   position: absolute;
 }
 
-.menu-header a:hover::after,
+/* .menu-header a:hover::after,
 .menu-header a.ativo::after {
   width: 100%;
-}
+} */
 
 .menu-header a:hover{
   transform: scale(1.25);
 }
 
-@media (max-width: 450px) {
-  .menu-header {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 10px;
+
+/* O restante do seu CSS permanece o mesmo */
+
+/* Media query para telas menores */
+@media (max-width: 768px) {
+  .container-header{
+    display: flex; 
+    flex-direction: column; 
+    align-items: stretch;
+    justify-content: flex-start;
   }
-  .menu-header a {
-    text-decoration: underline;
+  .mobile-menu{
+    display: flex;
+    flex-direction: column;
+  }
+  .menu-header {
+    display: flex;
+    flex-direction: column;
+    z-index: 999;
+    border-radius: 2%;
+  }
+
+  .active{
+    background-color: transparent;
+    backdrop-filter: blur(8px);
+    transition: 0.1s;
+  }
+
+  .hamburger-icon {
+    display: block;
+  }
+  .desktop-menu {
+    display: none;
   }
 }

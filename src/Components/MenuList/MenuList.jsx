@@ -4,6 +4,7 @@ import whatsapp from "../../assets/whatsapp.png";
 import { useForm } from "react-hook-form";
 import lottie from "lottie-web";
 import { defineElement } from "lord-icon-element";
+import check from '../../assets/check.gif'
 
 defineElement(lottie.loadAnimation);
 
@@ -353,7 +354,7 @@ const MenuList = () => {
                     trigger="loop"
                     delay="2000"
                   ></lord-icon>
-                  <p>Erro: O suporte técnco já está cuidando disso.</p>
+                  <p>Erro: O suporte técnico já está cuidando disso.</p>
                   <small>{isLoading.error}</small>
                 </>
               ) : (
@@ -364,6 +365,7 @@ const MenuList = () => {
             <>
               <h1>
                 CONFIRME SEU PEDIDO{" "}
+                <img src={check} alt="" />
                 <span
                   id="closeForm"
                   onClick={() => {
