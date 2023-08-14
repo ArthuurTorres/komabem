@@ -461,6 +461,11 @@ const MenuList = () => {
                           }
                         };
 
+                        if (e.key === "Delete" || e.key === "Backspace") {
+                          // Allow backspace and delete without applying mask
+                          return;
+                        }
+
                         e.target.value = phoneMask(e.target.value);
                       }}
                     ></input>
