@@ -4,7 +4,8 @@ import whatsapp from "../../assets/whatsapp.png";
 import { useForm } from "react-hook-form";
 import lottie from "lottie-web";
 import { defineElement } from "lord-icon-element";
-import check from '../../assets/check.gif'
+import check from "../../assets/check.gif";
+import items from "./items.jsx";
 
 defineElement(lottie.loadAnimation);
 
@@ -21,34 +22,6 @@ const MenuList = () => {
   const [selectedRow, setSelectedRow] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [cartString, setCartString] = useState("");
-
-  //items data
-  const items = {
-    class1: [
-      {
-        id: 1,
-        name: "item1",
-        value: 1000,
-      },
-      {
-        id: 2,
-        name: "item2",
-        value: 1500,
-      },
-    ],
-    class2: [
-      {
-        id: 3,
-        name: "item3",
-        value: 1000,
-      },
-      {
-        id: 4,
-        name: "item4",
-        value: 1500,
-      },
-    ],
-  };
 
   //Add style on selected row and format cart to submit
   useEffect(() => {
@@ -109,7 +82,7 @@ const MenuList = () => {
             }}
             className={itemClass === "class1" ? "active" : ""}
           >
-            classe 1
+            Combinados komabem - Individual
           </button>
           <button
             onClick={() => {
@@ -117,7 +90,15 @@ const MenuList = () => {
             }}
             className={itemClass === "class2" ? "active" : ""}
           >
-            classe 2
+            Linha tradicional - 2 pessoas
+          </button>
+          <button
+            onClick={() => {
+              setItemClass("class3");
+            }}
+            className={itemClass === "class3" ? "active" : ""}
+          >
+            Linha tradicional - Individual
           </button>
         </div>
 
@@ -133,107 +114,124 @@ const MenuList = () => {
               </tr>
             </thead>
             <tbody>
-              {items[itemClass].map((i) => (
-                <tr
-                  className={`${i.id % 2 === 0 ? "dark-row" : ""} ${
-                    selectedRow.find((r) => r === i.id) ? "selected-row" : ""
-                  }`}
-                  key={i.id}
-                  id={i.id + "row"}
-                >
-                  <td>{i.id}</td>
-                  <td>{i.name}</td>
-                  <td>
-                    {new Intl.NumberFormat("pt-br", {
-                      style: "currency",
-                      currency: "BRL",
-                    }).format(parseInt(i.value) / 100)}
-                  </td>
+              {items[itemClass].map((i, count) => (
+                <>
+                  {i.separator ? (
+                    <tr key={count} className="separator-row">
+                      <td colSpan="5">
+                        <h2>{i.separator}</h2>
+                      </td>
+                    </tr>
+                  ) : (
+                    <tr
+                      className={`${count % 2 === 0 ? "dark-row" : ""} ${
+                        selectedRow.find((r) => r === i.id)
+                          ? "selected-row"
+                          : ""
+                      }`}
+                      key={count}
+                      id={i.id + "row"}
+                    >
+                      <td>{i.id}</td>
+                      <td>{i.name}</td>
+                      <td>
+                        {new Intl.NumberFormat("pt-br", {
+                          style: "currency",
+                          currency: "BRL",
+                        }).format(parseInt(i.value) / 100)}
+                      </td>
 
-                  {/* Quantity input */}
-                  <td>
-                    <input
-                      type="number"
-                      defaultValue="1"
-                      min="1"
-                      max="20"
-                      id={"quantity" + i.id}
-                      onChange={(e) => {
-                        let cartHandler = [...cart];
-                        if (
-                          cartHandler.findIndex((item) => item.id === i.id) !==
-                          -1
-                        ) {
-                          cartHandler[
-                            cartHandler.findIndex((item) => item.id === i.id)
-                          ].quantity = e.target.value;
-                          setCart(cartHandler);
-                          console.log(cart);
-                        }
-                      }}
-                    ></input>
-                  </td>
+                      {/* Quantity input */}
+                      <td>
+                        <input
+                          type="number"
+                          defaultValue="1"
+                          min="1"
+                          max="20"
+                          id={"quantity" + i.id}
+                          onChange={(e) => {
+                            let cartHandler = [...cart];
+                            if (
+                              cartHandler.findIndex(
+                                (item) => item.id === i.id
+                              ) !== -1
+                            ) {
+                              cartHandler[
+                                cartHandler.findIndex(
+                                  (item) => item.id === i.id
+                                )
+                              ].quantity = e.target.value;
+                              setCart(cartHandler);
+                              console.log(cart);
+                            }
+                          }}
+                        ></input>
+                      </td>
 
-                  {/* Button add or remove item */}
-                  <td>
-                    {selectedRow.find((r) => r === i.id) ? (
-                      <button
-                        onClick={() => {
-                          //Remove item from cart
-                          let cartHandler = [...cart];
-                          cartHandler.splice(
-                            cartHandler.findIndex((item) => item.id === i.id),
-                            1
-                          );
-                          setCart(cartHandler);
-                        }}
-                        className="add-cart-button"
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="32"
-                          height="32"
-                          fill="currentColor"
-                          className="bi bi-cart-x"
-                          viewBox="0 0 16 16"
-                        >
-                          <path d="M7.354 5.646a.5.5 0 1 0-.708.708L7.793 7.5 6.646 8.646a.5.5 0 1 0 .708.708L8.5 8.207l1.146 1.147a.5.5 0 0 0 .708-.708L9.207 7.5l1.147-1.146a.5.5 0 0 0-.708-.708L8.5 6.793 7.354 5.646z" />
-                          <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zm3.915 10L3.102 4h10.796l-1.313 7h-8.17zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
-                        </svg>
-                      </button>
-                    ) : (
-                      <button
-                        onClick={() => {
-                          //Set item to cart
-                          setCart([
-                            ...cart,
-                            {
-                              id: i.id,
-                              name: i.name,
-                              quantity: document.getElementById(
-                                "quantity" + i.id
-                              ).value,
-                              value: i.value,
-                            },
-                          ]);
-                        }}
-                        className="add-cart-button"
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="32"
-                          height="32"
-                          fill="currentColor"
-                          className="bi bi-cart-plus"
-                          viewBox="0 0 16 16"
-                        >
-                          <path d="M9 5.5a.5.5 0 0 0-1 0V7H6.5a.5.5 0 0 0 0 1H8v1.5a.5.5 0 0 0 1 0V8h1.5a.5.5 0 0 0 0-1H9V5.5z" />
-                          <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zm3.915 10L3.102 4h10.796l-1.313 7h-8.17zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
-                        </svg>
-                      </button>
-                    )}
-                  </td>
-                </tr>
+                      {/* Button add or remove item */}
+                      <td>
+                        {selectedRow.find((r) => r === i.id) ? (
+                          <button
+                            onClick={() => {
+                              //Remove item from cart
+                              let cartHandler = [...cart];
+                              cartHandler.splice(
+                                cartHandler.findIndex(
+                                  (item) => item.id === i.id
+                                ),
+                                1
+                              );
+                              setCart(cartHandler);
+                            }}
+                            className="add-cart-button"
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="32"
+                              height="32"
+                              fill="currentColor"
+                              className="bi bi-cart-x"
+                              viewBox="0 0 16 16"
+                            >
+                              <path d="M7.354 5.646a.5.5 0 1 0-.708.708L7.793 7.5 6.646 8.646a.5.5 0 1 0 .708.708L8.5 8.207l1.146 1.147a.5.5 0 0 0 .708-.708L9.207 7.5l1.147-1.146a.5.5 0 0 0-.708-.708L8.5 6.793 7.354 5.646z" />
+                              <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zm3.915 10L3.102 4h10.796l-1.313 7h-8.17zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
+                            </svg>
+                          </button>
+                        ) : (
+                          <button
+                            onClick={() => {
+                              //Set item to cart
+                              setCart([
+                                ...cart,
+                                {
+                                  id: i.id,
+                                  name: i.name,
+                                  quantity: document.getElementById(
+                                    "quantity" + i.id
+                                  ).value,
+                                  value: i.value,
+                                },
+                              ]);
+                            }}
+                            className="add-cart-button"
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="32"
+                              height="32"
+                              fill="currentColor"
+                              className="bi bi-cart-plus"
+                              viewBox="0 0 16 16"
+                            >
+                              <path d="M9 5.5a.5.5 0 0 0-1 0V7H6.5a.5.5 0 0 0 0 1H8v1.5a.5.5 0 0 0 1 0V8h1.5a.5.5 0 0 0 0-1H9V5.5z" />
+                              <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zm3.915 10L3.102 4h10.796l-1.313 7h-8.17zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
+                            </svg>
+                          </button>
+                        )}
+                      </td>
+                    </tr>
+                  )}
+                </>
               ))}
             </tbody>
           </table>
@@ -364,8 +362,7 @@ const MenuList = () => {
           ) : (
             <>
               <h1>
-                CONFIRME SEU PEDIDO{" "}
-                <img src={check} alt="" />
+                CONFIRME SEU PEDIDO <img src={check} alt="" />
                 <span
                   id="closeForm"
                   onClick={() => {
