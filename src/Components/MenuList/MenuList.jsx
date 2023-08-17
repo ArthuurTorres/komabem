@@ -489,7 +489,7 @@ const MenuList = () => {
                 <label htmlFor="items">Pratos selecionados</label>
                 <div name="items" className="cartItems">
                   {/* Selected items table */}
-                  <div className="table-handler">
+                  <div className="cart-table-handler">
                     <table>
                       <thead>
                         <tr className="dark-row">
