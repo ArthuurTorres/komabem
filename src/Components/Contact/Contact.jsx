@@ -1,6 +1,6 @@
-import './Contact.css'
-import localization from '../../assets/localization.png'
-import tel from '../../assets/telephone.png'
+import "./Contact.css";
+import localization from "../../assets/localization.png";
+import tel from "../../assets/telephone.png";
 
 const Contact = () => {
   return (
@@ -12,7 +12,7 @@ const Contact = () => {
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1061.64513872081!2d-43.27149265326431!3d-22.892311656050676!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x997c3563a816a7%3A0x99dad71c91bdb089!2sR.%20%C3%81lvares%20Cabral%2C%20580%20-%20Cachambi%2C%20Rio%20de%20Janeiro%20-%20RJ%2C%2020780-320!5e0!3m2!1spt-BR!2sbr!4v1692047210737!5m2!1spt-BR!2sbr"
           width="600"
           height="350"
-          style={{ border: 0, borderRadius: '10px',}}
+          style={{ border: 0, borderRadius: "10px" }}
           allowfullscreen=""
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
@@ -45,7 +45,7 @@ const Contact = () => {
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default Contact
+export default Contact;
