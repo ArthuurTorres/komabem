@@ -8,9 +8,10 @@
   font-family: Poppins;
 }
 
-.menu-list h1 {
+.menu-list > h1 {
   font-size: 48px;
   font-weight: 500;
+  text-align: center;
 }
 
 .class-selector {
@@ -160,6 +161,10 @@
   flex-direction: column;
 }
 
+.button-handler {
+  padding: 0rem 0.5rem 0rem 0.5rem;
+}
+
 .menu-list > .form > form > button {
   margin: 1rem 0rem 1rem 0rem;
 }
@@ -243,5 +248,6 @@
 
   #formulary {
     padding: 0rem 0.5rem 0rem 0.5rem;
+    max-width: 100%;
   }
 }

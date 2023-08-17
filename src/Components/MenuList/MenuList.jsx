@@ -501,10 +501,10 @@ const MenuList = () => {
                         </tr>
                       </thead>
                       <tbody>
-                        {cart.map((i) => (
+                        {cart.map((i, key) => (
                           <tr
-                            className={i.id % 2 === 0 ? "dark-row" : ""}
-                            key={i.id}
+                            className={key % 2 === 0 ? "dark-row" : ""}
+                            key={key}
                           >
                             <td>{i.id}</td>
                             <td>{i.name}</td>
