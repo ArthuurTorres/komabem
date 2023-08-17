@@ -96,4 +96,17 @@
   .delivery > button a {
     font-size: 17px;
   }
+  .delivery{
+    padding-right: 0px;
+  }
+}
+
+@media (max-width:430px){
+  .delivery h2{
+    font-size: 54px;
+  }
+  .delivery > h2 > img {
+    width: 60px;
+    height: 50px;
+  }
 }

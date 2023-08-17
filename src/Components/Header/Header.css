@@ -59,10 +59,10 @@
   position: absolute;
 }
 
-/* .menu-header a:hover::after,
+.menu-header a:hover::after,
 .menu-header a.ativo::after {
   width: 100%;
-} */
+}
 
 .menu-header a:hover{
   transform: scale(1.25);
@@ -78,6 +78,7 @@
     flex-direction: column; 
     align-items: stretch;
     justify-content: flex-start;
+    padding-bottom: 20px;
   }
   .mobile-menu{
     display: flex;
@@ -93,7 +94,6 @@
   .active{
     background-color: transparent;
     backdrop-filter: blur(8px);
-    transition: 0.1s;
   }
 
   .hamburger-icon {

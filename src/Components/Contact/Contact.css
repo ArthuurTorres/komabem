@@ -6,6 +6,7 @@
   justify-content: center;
   gap: 146px;
   background: url('../../assets/bg-delivery.png');
+  padding-bottom: 20px;
 }
 
 ul {
@@ -44,5 +45,10 @@ ul {
 @media (max-width: 430px) {
   .footer-container {
     gap: 0px;
+  }
+}
+@media (max-width:350px){
+  .footer-container h2{
+    font-size: 30px;
   }
 }

@@ -8,6 +8,7 @@
 
 .restaurant {
   padding-right: 144px;
+  padding-bottom: 20px;
 }
 
 .restaurantimg {
@@ -23,6 +24,7 @@
   display: flex;
   flex-wrap: wrap;
   padding-left: 1rem;
+  padding-bottom: 5px;
 }
 
 .restaurant p {
@@ -80,5 +82,28 @@
   }
   .restaurant h2 {
     font-size: 52px;
+  }
+}
+
+@media (max-width: 435px){
+  .restaurant h2 > img{
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+  }
+
+  .restaurant h2{
+    font-size: 44px;
+    padding-left: 0px;
+  }
+}
+
+@media (max-width:373px){
+  .restaurant h2 > img{
+    width: 40px;
+    height: 40px;
+  }
+  .restaurant h2{
+    font-size: 38px;
   }
 }
