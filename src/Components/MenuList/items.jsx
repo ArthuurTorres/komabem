@@ -16,7 +16,7 @@ const items = {
     },
     {
       id: 241,
-      name: "Filé de Frango à Parmegiana com Purê de Batatas Coradas",
+      name: "Filé de Frango à Parmegiana com Purê de Batatas",
       value: 2500,
     },
     {
@@ -363,8 +363,8 @@ const items = {
       value: 3000,
     },
     {
-      id: 157,
-      name: "Pastéis de Forno Frango com Requeijão",
+      id: 158,
+      name: "Pastéis de Forno Frango",
       value: 3000,
     },
   ],
@@ -482,12 +482,12 @@ const items = {
     {
       id: 62,
       name: "Ravioli 4 queijos com molho branco",
-      value: 2500,
+      value: 2900,
     },
     {
       id: 63,
       name: "Rondelli 4 queijos com champignom ao molho branco",
-      value: 2700,
+      value: 2900,
     },
     {
       id: 68,
@@ -553,7 +553,7 @@ const items = {
     {
       id: 190,
       name: "Mocotó com Feijão Branco",
-      value: 2700,
+      value: 2500,
     },
     {
       id: 82,
@@ -633,6 +633,11 @@ const items = {
     },
     {
       separator: "Complementos",
+    },
+    {
+      id: 87,
+      name: "Abobrinha Refogada",
+      value: 1600,
     },
     {
       id: 88,
