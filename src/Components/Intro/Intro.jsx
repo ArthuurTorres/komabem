@@ -1,5 +1,5 @@
-import "./Intro.css";
-import logos from "../../assets/logo.png";
+import './Intro.css'
+import logos from '../../assets/logo.png'
 
 const Intro = () => {
   return (
@@ -11,17 +11,11 @@ const Intro = () => {
           cante que oferecemos diariamente.
         </h4>
         <button className="button" data-aos="zoom-in-right">
-          <a
-            href="https://wa.me/+55021972770807"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Faça seu Pedido
-          </a>
+          <a href="#menulist">Faça seu Pedido</a>
         </button>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Intro;
+export default Intro
