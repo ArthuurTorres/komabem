@@ -69,6 +69,23 @@ const MenuList = () => {
       .then((response) => response.json())
       .then((json) => setIsLoading({ success: json.message }))
       .catch((err) => setIsLoading({ error: json.message + " " + err }));
+    
+    //Google pixel
+    function gtag_report_conversion(url) {
+      var callback = function () {
+        if (typeof(url) != 'undefined') {
+          window.location = url;
+        }
+      };
+      gtag('event', 'conversion', {
+        'send_to': 'AW-11284618922/TcwACJnh3-cYEKq99oQq',
+        'transaction_id': '',
+        'event_callback': callback
+      });
+      return false;
+    }
+
+    gtag_report_conversion();
   }
 
   return (
@@ -245,6 +262,22 @@ const MenuList = () => {
                 document.getElementById("alert").style.display = "flex";
               } else {
                 document.getElementById("form").style.display = "flex";
+                
+                //Google pixel
+                function gtag_report_conversion(url) {
+                  var callback = function () {
+                    if (typeof(url) != 'undefined') {
+                      window.location = url;
+                    }
+                  };
+                  gtag('event', 'conversion', {
+                      'send_to': 'AW-11284618922/MwJdCJ7g3-cYEKq99oQq',
+                      'event_callback': callback
+                  });
+                  return false;
+                }
+
+                gtag_report_conversion();
               }
             }}
           >
@@ -320,7 +353,7 @@ const MenuList = () => {
                   ></lord-icon>
                   <p>
                     Sucesso: Sua mensagem foi enviada. Retornaremos seu contato
-                    em breve. em breve.
+                    em breve.
                   </p>
                   <small>{isLoading.success}</small>
                 </>
@@ -582,7 +615,7 @@ const MenuList = () => {
                 <button
                   className="button"
                   type="submit"
-                  disabled={cart.length === 0 ? true : false}
+                    disabled={cart.length === 0 ? true : false}
                 >
                   CONFIRME SEU PEDIDO{" "}
                   <img src={whatsapp} alt="whatsapp button" />
