@@ -14,20 +14,6 @@ const Whatsapp = () => {
     }
   });
 
-  function gtag_report_conversion(url) {
-    var callback = function () {
-      if (typeof(url) != 'undefined') {
-        window.location = url;
-      }
-    };
-    gtag('event', 'conversion', {
-        'send_to': 'AW-11284618922/ZZgVCJvg3-cYEKq99oQq',
-        'event_callback': callback
-    });
-    return false;
-  }
-
-
   return (
     <div id="whatsapp-button">
       <div className="teste">
@@ -37,7 +23,22 @@ const Whatsapp = () => {
         href="https://wa.me/+55021972770807"
         target="_blank"
         rel="noopener noreferrer"
-        onClick={()=>{gtag_report_conversion}}
+        onClick={() => {
+          function gtag_report_conversion(url) {
+            var callback = function () {
+              if (typeof(url) != 'undefined') {
+                window.location = url;
+              }
+            };
+            gtag('event', 'conversion', {
+                'send_to': 'AW-11284618922/ZZgVCJvg3-cYEKq99oQq',
+                'event_callback': callback
+            });
+            return false;
+          }
+          
+          gtag_report_conversion();
+        }}
       >
         <img src={whatsapp} alt="WhatsApp" />
       </a>
