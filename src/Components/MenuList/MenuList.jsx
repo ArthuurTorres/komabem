@@ -64,6 +64,9 @@ const MenuList = () => {
         new URLSearchParams(new FormData(document.getElementById("formulary"))),
       {
         method: "post",
+        headers: {
+          'Token': '1dCnjQYM1c8bM75eBFW65248c9d537be'
+        }
       }
     )
       .then((response) => response.json())
